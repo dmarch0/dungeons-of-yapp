@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"core/internal/services/user"
-
+	"core/configs"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -13,6 +13,7 @@ type PostLoginResult struct {
 }
 
 func PostLoginController(ctx *fiber.Ctx) error {
+	config := configs.GetConfig()
 	props := new(user.LoginUserProps)
 	err := ctx.BodyParser(props)
 	if err != nil {
@@ -27,10 +28,11 @@ func PostLoginController(ctx *fiber.Ctx) error {
 		})
 	}
 	ctx.Cookie(&fiber.Cookie{
-		Name:     "access_token",
+		Name:    config.HTTPServerConfig.AccessTokenCookieName,
 		Value:    token,
 		Secure:   true,
 		HTTPOnly: true,
+		Domain: "localhost:3000",
 	})
 
 	return ctx.Status(200).JSON(PostLoginResult{

@@ -21,5 +21,4 @@ func AddUserEndpoints(router fiber.Router) {
 		scheme_validation.ValidateBody[scheme_validation.PostRegisterBody](),
 		controllers.PostRegisterController,
 	)
-
 }

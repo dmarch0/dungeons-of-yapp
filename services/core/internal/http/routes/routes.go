@@ -8,4 +8,5 @@ func AddEndpoints(app *fiber.App) {
 
 	AddHelloEndpoints(v1)
 	AddUserEndpoints(v1.Group("/user"))
+	AddCharacterEndpoints(v1.Group("/character"))
 }

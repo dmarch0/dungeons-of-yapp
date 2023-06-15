@@ -1,12 +1,13 @@
-package db
+package migrations
 
 import (
 	"context"
+	"core/internal/db"
 	"log"
 )
 
-func InitTables(c context.Context) {
-	connection := GetDbConnection()
+func CreateTables(c context.Context) {
+	connection := db.GetDbConnection()
 
 	usersTable := `
 		CREATE TABLE IF NOT EXISTS users (
