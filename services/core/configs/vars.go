@@ -3,6 +3,7 @@ package configs
 import (
 	"os"
 	"strconv"
+
 	"github.com/gofiber/fiber/v2/middleware/encryptcookie"
 )
 
@@ -13,10 +14,10 @@ type Config struct {
 }
 
 type HTTPServerConfig struct {
-	Endpoint      string
-	CookieSecret  string
+	Endpoint              string
+	CookieSecret          string
 	AccessTokenCookieName string
-	AllowedOrigin string
+	AllowedOrigin         string
 }
 
 type PostgreSQLConfig struct {
@@ -31,15 +32,15 @@ func GetConfig() *Config {
 	}
 	config = &Config{
 		HTTPServerConfig: &HTTPServerConfig{
-			Endpoint:      getEnv("HTTP_ENDPOINT", ":3001"),
-			CookieSecret:  getEnv("COOKIE_SECRET", encryptcookie.GenerateKey()),
-			AllowedOrigin: getEnv("ALLOWED_ORIGIN", "http://localhost:3000"),
+			Endpoint:              getEnv("HTTP_ENDPOINT", ":3001"),
+			CookieSecret:          getEnv("COOKIE_SECRET", encryptcookie.GenerateKey()),
+			AllowedOrigin:         getEnv("ALLOWED_ORIGIN", "http://localhost:3000"),
 			AccessTokenCookieName: getEnv("ACCESS_TOKEN_COOKIE_NAME", "access_token"),
 		},
 		PostgreSQLConfig: &PostgreSQLConfig{
 			Uri: getEnv("POSTGRES_URI", "postgresql://admin:admin@postgres:5432/dungeons-of-yapp"),
 		},
-		MigrationVersion: getEnvInt("MIGRATION_VERSION", 1),
+		MigrationVersion: getEnvInt("MIGRATION_VERSION", 3),
 	}
 	return config
 }

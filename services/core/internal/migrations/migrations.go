@@ -15,4 +15,8 @@ func RunMigrations(c context.Context) {
 	if config.MigrationVersion <= 1 {
 		AddCharacterStats(c)
 	}
+
+	if config.MigrationVersion <= 2 {
+		RenameAgility(c)
+	}
 }

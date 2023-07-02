@@ -1,13 +1,14 @@
 package middleware
 
 import (
-	"core/internal/db"
 	"core/configs"
-	
+	"core/internal/db"
+
 	"context"
 
-	"github.com/gofiber/fiber/v2"
 	"log"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func WithUser(c *fiber.Ctx) error {
@@ -27,7 +28,7 @@ func WithUser(c *fiber.Ctx) error {
 		var id int
 		var email string
 
-		if err := db_connection.QueryRow(context, userQuery, token).Scan(&id, &email); err != nil {
+		if err := db_connection.QueryRow(context, userQuery, token).Scan(&id, &email); err == nil {
 			c.Locals("user_email", email)
 			c.Locals("user_id", id)
 		}

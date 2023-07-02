@@ -14,6 +14,6 @@ func AddCharacterEndpoints(router fiber.Router) {
 		"/random",
 		middleware.WithUser,
 		middleware.WithUserAuthorization,
-		controllers.PostCharacterRandomController
+		controllers.PostCharacterRandomController,
 	)
 }
